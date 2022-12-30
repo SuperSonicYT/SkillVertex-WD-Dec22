@@ -11,12 +11,13 @@ if(isset($_POST['submit'])) {
     $result = mysqli_query($conn, $sql_query);
     $row = mysqli_fetch_array($result);
     if($row['usercount']==1) {
-      $sql_query = "SELECT name AS username FROM users WHERE email='$email' AND password='$pwd';";
+      $sql_query = "SELECT id as userid,name AS username,password FROM users WHERE email='$email';";
       $result = mysqli_query($conn, $sql_query);
       $row = mysqli_fetch_array($result);
-      if($row['username']) {
+      if($row['username'] && password_verify($pwd,$row['password'])) {
         $_SESSION['username'] = $row['username'];
         $_SESSION['useremail'] = $email;
+        $_SESSION['userid'] = $row['userid'];
         header('Location: ../index.php');
       }
       else {

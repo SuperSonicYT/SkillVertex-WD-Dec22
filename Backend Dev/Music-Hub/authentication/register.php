@@ -5,36 +5,37 @@ include "../config.php";
 $message = '';
 
 if(isset($_POST['submit'])) {
-    $name = mysqli_real_escape_string($conn,$_POST['name']);
-    $email = mysqli_real_escape_string($conn,$_POST['email']);
-    $pwd = mysqli_real_escape_string($conn,$_POST['pwd']);
-    $cpwd = mysqli_real_escape_string($conn,$_POST['cpwd']);
+  $name = mysqli_real_escape_string($conn,$_POST['name']);
+  $email = mysqli_real_escape_string($conn,$_POST['email']);
+  $pwd = mysqli_real_escape_string($conn,$_POST['pwd']);
+  $cpwd = mysqli_real_escape_string($conn,$_POST['cpwd']);
 
-    if($name!="" && $email!="" && $pwd!="" && $cpwd!="") {
-        if($pwd===$cpwd) {
-            $sql_query = "SELECT count(*) AS usercount FROM users WHERE email='$email';";
-            $result = mysqli_query($conn, $sql_query);
-            $row = mysqli_fetch_array($result);
-            if ($row['usercount'] == 0) {
-                $sql_query = "INSERT INTO users (name,email,password) VALUES ('$name','$email','$pwd');";
-                $result = mysqli_query($conn, $sql_query);
-                if ($result) {
-                    header("Location:login.php");
-                } else {
-                    $message = "An unexpected error occured. Contact customer support.";
-                }
-            }
-            else {
-                $message = "Email address already exists. Login into your account";
-            }
+  if($name!="" && $email!="" && $pwd!="" && $cpwd!="") {
+    if($pwd===$cpwd) {
+      $sql_query = "SELECT count(*) AS usercount FROM users WHERE email='$email';";
+      $result = mysqli_query($conn, $sql_query);
+      $row = mysqli_fetch_array($result);
+      if ($row['usercount'] == 0) {
+        $pwd_cipher = password_hash($pwd, PASSWORD_ARGON2ID);
+        $sql_query = "INSERT INTO users (name,email,password) VALUES ('$name','$email','$pwd_cipher');";
+        $result = mysqli_query($conn, $sql_query);
+        if ($result) {
+          header("Location:login.php");
+        } else {
+          $message = "An unexpected error occured. Contact customer support.";
         }
-        else {
-            $message = "Entered passwords did not match";
-        }
-    } 
-    else {
-        $message = "All fields are mandatory";
+      }
+      else {
+        $message = "Email address already exists. Login into your account";
+      }
     }
+    else {
+      $message = "Entered passwords did not match";
+    }
+  } 
+  else {
+    $message = "All fields are mandatory";
+  }
 }
 
 ?>

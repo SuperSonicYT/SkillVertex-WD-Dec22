@@ -14,6 +14,7 @@ if(isset($_GET['logout'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <link href="css/style.css" rel="stylesheet">
         
         <style>
@@ -211,9 +212,58 @@ if(isset($_GET['logout'])) {
             </ul>
         </section>
 
-        <section id="page-content">
-            <div ></div>
+        <section id="page-content" class="m-5">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+            <?php
+                $sql_query = "SELECT * FROM music;";
+                $result = mysqli_query($conn, $sql_query);
+                while ($data = mysqli_fetch_array($result)) {
+            ?>
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="./assets/musicimg/<?php echo $data['image'] ?>" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <audio controls>
+                                <source src='./assets/music/<?php echo $data['link'] ?>' />
+                            </audio>
+                            <h5 class="card-title"><?php echo $data['name'] ?></h5>
+                            <table class="card-text">
+                                <tr>
+                                    <td>Album</td>
+                                    <td><?php echo $data['album'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Label</td>
+                                    <td><?php echo $data['label'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Starring</td>
+                                    <td><?php echo $data['starring'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Composer</td>
+                                    <td><?php echo $data['composer'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Singer</td>
+                                    <td><?php echo $data['singer'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Song Writer</td>
+                                    <td><?php echo $data['songwriter'] ?></td>
+                                </tr>
+
+                            </table>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted"><?php echo $data['views'] ?> Views</small>
+                        </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
         </section>
         <footer id="footer"></footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     </body>
 </html>
