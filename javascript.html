@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+</head>
+<body>
+    <p onmouseover="document.getElementById('myH2').innerHTML='Mouse Over'" onmouseout="document.getElementById('myH2').innerHTML='Mouse Out'" id="myH2" style="color: black;">Hello World</p>
+    <button onclick="onclickBtn()" on>Click!</button>
+    <script>
+        //variables 
+
+        var a;
+        let b;
+        const c = 324234;
+
+
+        if(c<0) {
+            let x;
+            print(a);         //will be printed
+            print(x);         //will be printed
+        }
+        //console.log(a);         //will be printed
+        //console.log(x);         //will not be printed
+
+        /* multi line 
+        comment */
+ 
+
+        //primitive data types
+        var a = "String";    //string
+        var num = 435345;;    //number/integer
+        var _ewwer = true;;    //boolean
+
+        //trivial datatypes
+        var nul="";    //null
+        var x=null;    // null
+        var y;         //undefined
+
+
+        //arrays and objects
+        var arr = [234,"dsfsdfsdf",true]     // array
+        arr[0]      ///234
+
+        const obj = {
+            prop1: "value1",
+            prop2: {
+                prop2_1: "value",
+                prop2_2: function() {
+                    //console.log(this.prop1)
+                }
+            },
+            prop3: [234234,"wewerw"],
+            prop4: null,
+            prop5: true
+        }
+        obj.prop1               //value1
+        obj.prop2.prop2_2()     //value1
+        obj.prop3[1]            //wewerw
+
+        for(let value in obj) {
+            console.log(obj[value]);
+        }
+
+        //output
+            // document.getElementById("myH2").innerText = "This is Javascript";
+            // document.write("Output");
+            // window.alert("Error message!");
+            // console.log("Secret message");
+            // window.print();
+
+
+        //notifications
+            // window.alert("This is a warning");
+            // let res = window.confirm("Are you sure?");
+            // console.log(res);
+            // let name = window.prompt("Enter your name");
+            // console.log(name);
+
+        if(x>=4) {
+            // statement1;
+        }
+        else {
+            // statement2;
+        }
+
+        //conditional operator
+            // x>=4 ? statement1 : statement2 ;
+
+
+        
+        for(let i=1;i<100;i++) {
+            if(i==50) {
+                break;
+            }
+            console.log(i);
+        }
+
+        // functions
+
+        function myfunc() {}        //orthodox func
+
+        const myfunc = (a,b) => {      //lambda or arrow function
+            return a*b;
+        }
+
+
+
+    </script>
+</body>
+</html>
